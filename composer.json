@@ -1,0 +1,27 @@
+{
+  "name": "fabs/celery_client",
+  "type": "library",
+  "description": "Celery php client",
+  "keywords": [
+    "celery",
+    "celery php",
+    "task queue"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Ahmet Turk",
+      "email": "ahmetturk93@gmail.com",
+      "homepage": "https://github.com/fabsolute"
+    }
+  ],
+  "require": {
+    "php": "^7.0",
+    "php-amqplib/php-amqplib": "^2.6"
+  },
+  "autoload": {
+    "psr-0": {
+      "Fabs\\Celery": "src"
+    }
+  }
+}
