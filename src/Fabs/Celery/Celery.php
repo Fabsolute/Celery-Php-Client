@@ -31,12 +31,37 @@ class Celery
      */
     private $route_key = '';
 
-    public function __construct($amqp_host, $amqp_port, $amqp_user, $amqp_password,
+    public function __construct($amqp_host_or_connection, $amqp_port = '', $amqp_user = '', $amqp_password = '',
                                 $exchange_name = 'celery', $route_key = 'celery')
     {
-        $this->connection = new AMQPStreamConnection($amqp_host, $amqp_port, $amqp_user, $amqp_password);
+        if (is_string($amqp_host_or_connection)) {
+            $this->connection = new AMQPStreamConnection($amqp_host_or_connection, $amqp_port, $amqp_user, $amqp_password);
+        } else {
+            $this->connection = $amqp_host_or_connection;
+        }
+
         $this->exchange_name = $exchange_name;
         $this->route_key = $route_key;
+    }
+
+    /**
+     * @param $name
+     * @return Celery
+     */
+    public function setExchangeName($name)
+    {
+        $this->exchange_name = $name;
+        return $this;
+    }
+
+    /**
+     * @param $name
+     * @return Celery
+     */
+    public function setRouteKey($name)
+    {
+        $this->route_key = $name;
+        return $this;
     }
 
     public function postTask($task_name, $arguments, $task_arguments = [])
