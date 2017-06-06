@@ -1,5 +1,5 @@
 {
-  "name": "fabs/celery_client",
+  "name": "fabs/celery-client",
   "type": "library",
   "description": "Celery php client",
   "keywords": [
