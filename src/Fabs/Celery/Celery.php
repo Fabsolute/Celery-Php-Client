@@ -117,7 +117,7 @@ class Celery
 
             $channel = $this->connection->channel();
             $channel->basic_publish($amqp_message, $this->exchange_name, $this->route_key);
-
+            $channel->close();
             return new AsyncResult($unique_id, $this->connection, $arguments);
         } catch (\Exception $e) {
             throw  new CeleryPublishException();
@@ -147,5 +147,10 @@ class Celery
         $arguments_content = '(' . $arguments_content . ')';
         $arguments_content = str_replace("\"", "'", $arguments_content);
         return $arguments_content;
+    }
+
+    public function close()
+    {
+        $this->connection->close();
     }
 }
