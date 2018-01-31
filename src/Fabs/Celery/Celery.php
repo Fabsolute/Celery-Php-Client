@@ -120,7 +120,7 @@ class Celery
             $channel->close();
             return new AsyncResult($unique_id, $this->connection, $arguments);
         } catch (\Exception $e) {
-            throw  new CeleryPublishException();
+            throw  new CeleryPublishException($e->getMessage(), 500, $e);
         }
     }
 
